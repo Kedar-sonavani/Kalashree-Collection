@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm Editorial - Light Mode */
+    --background: 40 20% 97%; /* Soft Cream */
+    --foreground: 20 14.3% 4.1%; /* Deep Brown/Black */
+
+    --card: 40 20% 97%;
+    --card-foreground: 20 14.3% 4.1%;
+
+    --popover: 40 20% 97%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    --primary: 24 9.8% 10%; /* Deep Earth */
+    --primary-foreground: 60 9.1% 97.8%;
+
+    --secondary: 30 6.0% 90.0%; /* Soft Beige */
+    --secondary-foreground: 24 9.8% 10%;
+
+    --muted: 30 6.0% 90.0%;
+    --muted-foreground: 24 5.4% 43.9%;
+
+    --accent: 30 40% 50%; /* Terracotta/Bronze */
+    --accent-foreground: 60 9.1% 97.8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 20 5.9% 88%;
+    --input: 20 5.9% 88%;
+    --ring: 24 9.8% 10%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Warm Editorial - Dark Mode */
+    --background: 20 14.3% 4.1%; /* Deep Brown/Black */
+    --foreground: 60 9.1% 97.8%; /* Soft White */
+
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+
+    --accent: 30 40% 50%; /* Terracotta/Bronze - Keeps warmth in dark mode */
+    --accent-foreground: 60 9.1% 97.8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
