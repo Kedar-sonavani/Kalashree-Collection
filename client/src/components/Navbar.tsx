@@ -31,20 +31,20 @@ export function Navbar() {
     });
 
     const handleInquiry = () => {
-        const message = "Hi! I'm interested in the hanky collection.";
+        const message = "Hi! I'm interested in the collection.";
         window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
-    // UPDATED: Scroll transitions to BLACK (Dark Mode)
+    // LIGHT THEME: Transparent -> White/90
     const backgroundColor = useTransform(
         scrollY,
         [0, 50],
-        ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.8)'] // Transparent -> Black/80
+        ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.95)']
     );
     const borderBottom = useTransform(
         scrollY,
         [0, 50],
-        ['1px solid rgba(255, 255, 255, 0)', '1px solid rgba(255, 255, 255, 0.1)'] // Transparent -> Faint White
+        ['1px solid rgba(0, 0, 0, 0)', '1px solid rgba(0, 0, 0, 0.05)']
     );
 
     return (
@@ -55,53 +55,37 @@ export function Navbar() {
             >
                 <div className="container flex items-center justify-between h-14">
 
-                    {/* 1. LEFT: LOGO */}
+                    {/* 1. LOGO */}
                     <div className="flex-shrink-0 z-20">
                         <Link href="/" className="flex items-center gap-2 group">
-                            <span className={cn(
-                                "font-heading font-extrabold tracking-tighter text-2xl md:text-3xl uppercase transition-colors duration-300",
-                                isScrolled ? "text-white" : "text-black"
-                            )}>
-                                {(process.env.NEXT_PUBLIC_SITE_NAME || "Hanky Corner").split(' ')[0]}{' '}
-                                <span className={cn(
-                                    "italic font-serif transition-colors duration-300",
-                                    isScrolled ? "text-white/80" : "text-black/80"
-                                )}>
-                                    {(process.env.NEXT_PUBLIC_SITE_NAME || "Hanky Corner").split(' ').slice(1).join(' ')}
+                            <span className="font-heading font-extrabold tracking-tighter text-2xl md:text-3xl uppercase transition-colors text-black">
+                                {(process.env.NEXT_PUBLIC_SITE_NAME || "Kalashree").split(' ')[0]}{' '}
+                                <span className="italic font-serif font-normal text-amber-900/80">
+                                    {(process.env.NEXT_PUBLIC_SITE_NAME || "Collection").split(' ').slice(1).join(' ')}
                                 </span>
                             </span>
                         </Link>
                     </div>
 
-                    {/* 2. CENTER: NAVIGATION */}
+                    {/* 2. NAVIGATION (Premium Centered) */}
                     <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                         {['New Arrivals', 'Collections'].map((item) => (
                             <Link
                                 key={item}
                                 href={`/${item.toLowerCase().replace(' ', '-')}`}
-                                // UPDATED: Always White/70 -> White
-                                className={cn(
-                                    "relative text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-300 py-1 group",
-                                    isScrolled ? "text-white/70 hover:text-white" : "text-black/70 hover:text-black"
-                                )}
+                                className="relative text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-600 hover:text-black transition-colors py-1 group"
                             >
                                 {item}
-                                {/* UPDATED: Underline */}
-                                <span className={cn(
-                                    "absolute bottom-0 left-0 w-0 h-[1px] transition-all duration-300 group-hover:w-full",
-                                    isScrolled ? "bg-white" : "bg-black"
-                                )} />
+                                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-amber-600/40 transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
                     </nav>
 
-                    {/* 3. RIGHT: TOOLS & ACTIONS */}
+                    {/* 3. ACTIONS */}
                     <div className="flex items-center gap-1 md:gap-4 z-20">
-
-                        {/* Expandable Search Bar */}
                         <div className="flex items-center">
                             <AnimatePresence mode="wait">
-                                {isSearchOpen ? (
+                                {isSearchOpen && (
                                     <motion.div
                                         initial={{ width: 0, opacity: 0 }}
                                         animate={{ width: 200, opacity: 1 }}
@@ -109,55 +93,34 @@ export function Navbar() {
                                         className="hidden md:flex items-center overflow-hidden mr-2"
                                     >
                                         <Input
-                                            placeholder="Search..."
-                                            // Dynamic Input Styles
-                                            className={cn(
-                                                "h-8 text-xs bg-transparent border-0 border-b rounded-none focus-visible:ring-0 px-0 placeholder:opacity-50 transition-colors",
-                                                isScrolled
-                                                    ? "text-white border-white/30 focus-visible:border-white placeholder:text-white/50"
-                                                    : "text-black border-black/20 focus-visible:border-black placeholder:text-black/40"
-                                            )}
+                                            placeholder="Search collection..."
+                                            className="h-8 text-xs bg-transparent border-0 border-b border-black/20 rounded-none focus-visible:ring-0 px-0 placeholder:text-black/40 text-black"
                                             autoFocus
-                                            onBlur={() => !isSearchOpen && setIsSearchOpen(false)}
+                                            onBlur={() => setIsSearchOpen(false)}
                                         />
                                     </motion.div>
-                                ) : null}
+                                )}
                             </AnimatePresence>
-
                             <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                // UPDATED: Always White
-                                className={cn(
-                                    "rounded-full transition-colors duration-300",
-                                    isScrolled
-                                        ? "hover:bg-white/10 text-white"
-                                        : "hover:bg-black/5 text-black"
-                                )}
+                                className="rounded-full hover:bg-black/5 text-black/70"
                             >
                                 {isSearchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
                             </Button>
                         </div>
 
-                        {/* User Profile */}
-                        <div className={cn("hidden sm:block transition-colors duration-300", isScrolled ? "text-white" : "text-black")}>
+                        <div className="hidden sm:block text-black">
                             <UserProfile />
                         </div>
 
-                        {/* Cart Button */}
                         {!isLoading && isEcommerceActive && (
                             <Button
                                 variant="ghost"
                                 size="icon"
                                 onClick={() => setIsCartOpen(true)}
-                                // UPDATED: Always White
-                                className={cn(
-                                    "relative rounded-full transition-colors duration-300",
-                                    isScrolled
-                                        ? "hover:bg-white/10 text-white"
-                                        : "hover:bg-black/5 text-black"
-                                )}
+                                className="relative rounded-full hover:bg-black/5 text-black"
                             >
                                 <ShoppingCart className="h-4 w-4" />
                                 <AnimatePresence>
@@ -166,11 +129,7 @@ export function Navbar() {
                                             initial={{ scale: 0 }}
                                             animate={{ scale: 1 }}
                                             exit={{ scale: 0 }}
-                                            // UPDATED: Badge
-                                            className={cn(
-                                                "absolute -top-1 -right-1 text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center shadow-sm transition-colors",
-                                                isScrolled ? "bg-white text-black" : "bg-black text-white"
-                                            )}
+                                            className="absolute -top-1 -right-1 text-[9px] font-bold h-4 w-4 rounded-full flex items-center justify-center bg-black text-white shadow-sm"
                                         >
                                             {cartCount}
                                         </motion.span>
@@ -179,27 +138,10 @@ export function Navbar() {
                             </Button>
                         )}
 
-                        {/* Inquire Button */}
-                        {!isLoading && !isEcommerceActive && (
-                            <Button
-                                variant="default"
-                                size="sm"
-                                onClick={handleInquiry}
-                                // UPDATED: White Button
-                                className="hidden md:flex font-bold uppercase tracking-widest text-[10px] rounded-full px-6 bg-white text-black hover:bg-white/90"
-                            >
-                                Inquire
-                            </Button>
-                        )}
-
-                        {/* Mobile Menu */}
                         <Button
                             variant="ghost"
                             size="icon"
-                            className={cn(
-                                "lg:hidden rounded-full transition-colors duration-300",
-                                isScrolled ? "hover:bg-white/10 text-white" : "hover:bg-black/5 text-black"
-                            )}
+                            className="lg:hidden rounded-full hover:bg-black/5 text-black"
                             onClick={() => setIsMobileMenuOpen(true)}
                         >
                             <Menu className="h-5 w-5" />
