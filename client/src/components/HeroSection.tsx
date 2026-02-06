@@ -33,14 +33,12 @@ export function HeroSection() {
             {/* Editorial Frame (Darkened for visibility) */}
             <div className="absolute inset-6 md:inset-10 border border-black/10 pointer-events-none z-10 flex flex-col justify-between p-4 md:p-8">
                 <div className="flex justify-between items-start text-[10px] md:text-xs font-medium uppercase tracking-[0.3em] text-black/60">
-                    <span>Collection No. 02</span>
+                    <span></span>
                     <span className="hidden md:block">Handcrafted Heritage</span>
-                    <span>© 2024</span>
+                    <span>© 2026</span>
                 </div>
                 <div className="flex justify-between items-end text-[10px] md:text-xs font-medium uppercase tracking-[0.3em] text-black/60">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-[1px] bg-black/20" />
-                        <span>Sustainably Sourced</span>
                     </div>
                 </div>
             </div>
